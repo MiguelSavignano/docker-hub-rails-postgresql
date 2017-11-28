@@ -1,0 +1,31 @@
+version: '3'
+services:
+  web:
+    image: miguelsavignano/rails_5.1.4_postgresql
+    container_name: web
+    stdin_open: true
+    tty: true
+    command: "bash ./web_start.sh"
+    volumes:
+      - .:/myapp
+      - ./volumes/bundle:/usr/local/bundle
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    network_mode: host
+  db:
+    image: postgres:9.5.9
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./volumes/postgresql:/var/lib/postgresql/data
+  mailcatcher:
+    image: schickling/mailcatcher
+    ports:
+      - 1025:1025
+      - 1080:1080
+
+# docker-compose up -d
+# docker exec -it web bash
+# rake db:setup
