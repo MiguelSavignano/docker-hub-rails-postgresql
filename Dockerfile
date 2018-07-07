@@ -1,4 +1,4 @@
-FROM ruby:2.4.2
+FROM ruby:2.4.3
 LABEL mainteiner=migue.masx@gmail.com
 RUN apt-get update -qq && apt-get install -y \
   build-essential \
